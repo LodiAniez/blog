@@ -1,4 +1,5 @@
 import { Response } from "express"
+import { PORT, SERVER_ENVIRONMENT } from "./../secrets/secrets"
 
 export class ErrorException extends Error {
 	statusCode: number | null
@@ -25,4 +26,8 @@ export const respondError = (res: Response, err: unknown): void => {
 		message: error.message || "Internal Server Error.",
 		status: false
 	})
+}
+
+export const generateImagePath = (filename: string): string => {
+	return `${SERVER_ENVIRONMENT}:${PORT}/static/${filename}`
 }

@@ -15,6 +15,10 @@ const blogSchema: Schema = new Schema({
 		type: Date,
 		default: new Date()
 	},
+	updatedAt: {
+		type: Date,
+		default: new Date()
+	},
 	images: {
 		type: Array<string>,
 		default: null

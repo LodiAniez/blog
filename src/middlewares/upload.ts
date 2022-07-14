@@ -1,4 +1,5 @@
 import multer, { Multer, StorageEngine } from "multer"
+import fs from "fs"
 
 const fileStorageEngine: StorageEngine = multer.diskStorage({
 	destination: (req, file, cb) => {
@@ -9,4 +10,15 @@ const fileStorageEngine: StorageEngine = multer.diskStorage({
 	}
 })
 
-export const upload: Multer = multer({ storage: fileStorageEngine })
+export const upload: Multer = multer({
+	storage: fileStorageEngine,
+	fileFilter(req, file, callback) {
+		const filePath: string = `./src/uploads/${file.originalname}`
+
+		if (fs.existsSync(filePath)) {
+			callback(null, false)
+		} else {
+			callback(null, true)
+		}
+	}
+})

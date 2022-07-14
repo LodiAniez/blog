@@ -9,6 +9,7 @@ export interface IBlog {
 	description: string;
 	images?: IImage[];
 	slug?: string;
+	updatedAt?: Date
 }
 
 export interface IMulterFile {
