@@ -1,0 +1,225 @@
+{
+	"info": {
+		"_postman_id": "4943b578-66ad-4bd7-90bf-67a42d24a8b9",
+		"name": "Blog",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "15743036"
+	},
+	"item": [
+		{
+			"name": "Create New Blog",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "title",
+							"value": "aniez louie",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "test description ",
+							"type": "text"
+						},
+						{
+							"key": "images",
+							"type": "file",
+							"src": [
+								"/C:/Users/Programming/Pictures/dark-green.jpg",
+								"/C:/Users/Programming/Pictures/dark-green-with-logo.jpg"
+							]
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:3000/blog/new",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"blog",
+						"new"
+					]
+				},
+				"description": "This endpoint accepts a payload of type:\n\n````typescript\n{\n images?: Blob[];\n title: string;\n description: string;\n}\n````\nimages are processed using the `multer` library and is stored in `src/uploads` directory, collection of images path is saved in mongodb blogs collection as reference during when the user wants to retrieve an image."
+			},
+			"response": []
+		},
+		{
+			"name": "Update Blog",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "title",
+							"value": "updated value dex",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:3000/blog/update/aniez-louie",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"blog",
+						"update",
+						"aniez-louie"
+					],
+					"query": [
+						{
+							"key": "title",
+							"value": "",
+							"disabled": true
+						}
+					]
+				},
+				"description": "This endpoint allows the user to edit a specific blog using the slug value, that will be concatenated from the endpoint's URL.\n\nThis endpoint will accept a payload of type\n\n``` typescript\n{\n title: string;\n description: string;\n images: Blob[];\n}\n\n```"
+			},
+			"response": []
+		},
+		{
+			"name": "Image Upload",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "images",
+							"type": "file",
+							"src": "/C:/Users/Programming/Desktop/blog/src/uploads/1657766339084_dark-green-with-logo.jpg"
+						},
+						{
+							"key": "slug",
+							"value": "aniez-louie",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:3000/blog/fileupload",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"blog",
+						"fileupload"
+					]
+				},
+				"description": "This endpoint will allow the user to upload images for a specific blog. This endpoint accepts a payload of type:\n\n``` typescript\n{\n images: Blob[];\n slug: string;\n}\n\n```"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Blog",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "id",
+							"value": "62cf80be856a226b0993b117",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:3000/blog/delete",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"blog",
+						"delete"
+					]
+				},
+				"description": "This endpoint allows the user to permanently delete a blog, the payload is of type:\n\n``` typescript\n{\n id: string;\n}\n\n```\n\nThe id is the blog's id from the database collection."
+			},
+			"response": []
+		},
+		{
+			"name": "View Specific Blog",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/blog/view/aniez-louie",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"blog",
+						"view",
+						"aniez-louie"
+					]
+				},
+				"description": "This endpoint is used to retrieve a specific blog data using the slug from the paramater."
+			},
+			"response": []
+		},
+		{
+			"name": "Search Blog",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/blog/search/aniez",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"blog",
+						"search",
+						"aniez"
+					]
+				},
+				"description": "This endpoint allows the user to search for blogs that matches the text passed from the endpoint param."
+			},
+			"response": []
+		},
+		{
+			"name": "Blog List",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/blog/list",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"blog",
+						"list"
+					]
+				},
+				"description": "This endpoint returns all created blogs from the database."
+			},
+			"response": []
+		}
+	]
+}
