@@ -47,4 +47,6 @@ blogSchema.pre("findOneAndUpdate", function (next) {
 	next()
 })
 
+blogSchema.index({ title: "text", slug: "text" })
+
 export const blog: Model<any> = model("blog", blogSchema)

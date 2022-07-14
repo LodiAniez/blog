@@ -125,4 +125,44 @@ app.get("/view/:slug", async (req: Request, res: Response) => {
 	}
 })
 
+app.get("/search/:text", async (req: Request, res: Response) => {
+	try {
+		const { text } = req.params
+
+		if (text) {
+			const result: IBlog[] = await blog.find({
+				$text: {
+					$search: text,
+					$caseSensitive: false
+				}
+			})
+
+			return res.status(200).send({
+				message: "Result.",
+				data: result
+			})
+		}
+
+		res.status(200).send({
+			message: "Empty set.",
+			data: []
+		})
+	} catch (err) {
+		respondError(res, err)
+	}
+})
+
+app.get("/list", async (req: Request, res: Response) => {
+	try {
+		const result: IBlog[] = await blog.find()
+
+		res.status(200).send({
+			message: result.length ? "Result found." : "Empty set.",
+			data: result
+		})
+	} catch (err) {
+		respondError(res, err)
+	}
+})
+
 export default app
