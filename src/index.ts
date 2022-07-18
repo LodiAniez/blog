@@ -1,11 +1,11 @@
-import express from "express"
+import express, { Express } from "express"
 import cors from "cors"
 import { PORT, SERVER_ENVIRONMENT } from "./secrets/secrets"
 import { route } from "./middlewares/route"
 import { connection } from "./configs/db"
 import path from "path"
 
-const app = express()
+const app: Express = express()
 
 app.use(cors())
 app.use(express.json())
